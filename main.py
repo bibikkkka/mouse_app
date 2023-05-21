@@ -3,6 +3,7 @@ import time
 import kivy
 import pyautogui as pyautogui
 from kivy.app import App
+from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
@@ -161,6 +162,8 @@ def send_port(self, x, y):
 
 class MouseApp(App):
     def build(self):
+        self.icon = "app_icon.png"
+        Window.clearcolor = (1,1,1,1)
         return kv
 
 if __name__ == "__main__":

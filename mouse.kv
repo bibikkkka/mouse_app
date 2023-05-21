@@ -2,45 +2,85 @@ WindowManager:
     MainWindow:
     MouseWindow:
     TouchPadWindow:
+<Label>
+    font_size: 60
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (66/255,87/255,237/250,0.5)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [60]
+
 
 <MainWindow>:
     name: "main"
     ip: ip
     GridLayout:
         cols: 1
-        rows: 4
-        Button:
-            text: "Touchpad"
-            on_release:
-                app.root.current = "touchpad"
-                root.manager.transition.direction = "left"
-
-        Button:
-            text: "Mouse"
-            on_release:
-                app.root.current = "mouse"
-                root.manager.transition.direction = "right"
-
+        rows: 5
+        spacing: 20
+        padding: 20
+        Label:
+            text: "Happy PIG"
+            color: (66/255,87/255,237/250,0.5)
+            bold: True
+            italic: True
+            size_hint: (None,None)
+            size: 270, 50
         GridLayout:
             cols: 2
             GridLayout:
                 cols: 2
                 Label:
                     text: "IP: "
+                    font_size: 40
+                    size_hint: (0.5,0.5)
+                    size: 100, 100
+                    color: (66/255,87/255,237/250,0.5)
                 TextInput:
                     id: ip
                     multiline:False
-        Button:
+                    background_color: (66/255,87/255,237/250,0.5)
+        RoundedButton:
             text:"Submit"
+            pos_hint: {'center_x': 0.5}
             on_press: root.btn()
+        RoundedButton:
+            text: "Touchpad"
+            on_release:
+                app.root.current = "touchpad"
+                root.manager.transition.direction = "left"
+
+        RoundedButton:
+            text: "Mouse"
+            on_release:
+                app.root.current = "mouse"
+                root.manager.transition.direction = "right"
+            Image:
+                source: 'mouse_icon.png'
+                size_hint_y: 150
+                size_hint_x: 150
+                y: self.parent.y
+                x: self.parent.x
+                width: 150
+                height: 110
+                keep_ratio: True
+                allow_stretch: True
+
 
 <TouchPadWindow>
     name: "touchpad"
     btn: btn
-    Button:
+    RoundedButton:
+        icon:''
         id: btn
         text: "Menu"
-        size: 100,100
+        font_size: 40
+        size: 120,120
         size_hint:None, None
         on_release:
             app.root.current = "main"
@@ -54,36 +94,41 @@ WindowManager:
 
         GridLayout:
             cols: 3
-            Button:
-                text:"Left"
-                size: 200,200
-                background_color: "violet"
+            spacing: 10
+            padding: 10
+            RoundedButton:
+                text:"L"
+                size: 150,150
                 on_press: root.leftbtn()
 
             GridLayout:
                 cols: 1
                 rows: 2
-                Button:
+                spacing: 5
+                padding: 5
+                RoundedButton:
                     text: "UP"
+                    font_size:35
                     size: 50, 50
                     on_press: root.scrol(20)
 
-                Button:
+                RoundedButton:
                     text: "DW"
+                    font_size:35
                     size: 50, 50
                     on_press: root.scrol(-20)
 
-            Button:
-                text:"Right"
-                size: 200,200
-                background_color: "violet"
+            RoundedButton:
+                text:"R"
+                size: 150,100
                 on_press: root.rightbtn()
 
         Label:
             text:" "
-        Button:
+        RoundedButton:
             text: "Menu"
-            size: 100,100
+            font_size: 40
+            size: 120,120
             size_hint:None, None
             on_release:
                 app.root.current = "main"
