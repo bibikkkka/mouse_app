@@ -1,0 +1,98 @@
+WindowManager:
+    MainWindow:
+    MouseWindow:
+    TouchPadWindow:
+
+<MainWindow>:
+    name: "main"
+    ip: ip
+    GridLayout:
+        cols: 1
+        rows: 4
+        Button:
+            text: "Touchpad"
+            on_release:
+                app.root.current = "touchpad"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Mouse"
+            on_release:
+                app.root.current = "mouse"
+                root.manager.transition.direction = "right"
+
+        GridLayout:
+            cols: 2
+            GridLayout:
+                cols: 2
+                Label:
+                    text: "IP: "
+                TextInput:
+                    id: ip
+                    multiline:False
+        Button:
+            text:"Submit"
+            on_press: root.btn()
+
+<TouchPadWindow>
+    name: "touchpad"
+    btn: btn
+    Button:
+        id: btn
+        text: "Menu"
+        size: 100,100
+        size_hint:None, None
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
+
+<MouseWindow>:
+    name: "mouse"
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 3
+            Button:
+                text:"Left"
+                size: 200,200
+                background_color: "violet"
+                on_press: root.leftbtn()
+
+            GridLayout:
+                cols: 1
+                rows: 2
+                Button:
+                    text: "UP"
+                    size: 50, 50
+                    on_press: root.scrol(20)
+
+                Button:
+                    text: "DW"
+                    size: 50, 50
+                    on_press: root.scrol(-20)
+
+            Button:
+                text:"Right"
+                size: 200,200
+                background_color: "violet"
+                on_press: root.rightbtn()
+
+        Label:
+            text:" "
+        Button:
+            text: "Menu"
+            size: 100,100
+            size_hint:None, None
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "left"
+
+
+
+
+
+
+
+
